@@ -1,0 +1,13 @@
+DIRS=$(subst $(space),$(newline),$(shell cd src && go list ./...))
+
+TEST=$(subst $(space),$(newline),$(shell cd src && go list -f '{{if or .TestGoFiles .XTestGoFiles}}{{.Dir}}{{end}}' ./...))
+
+NOTEST=$(filter-out $(TEST),$(DIRS))
+
+test-compile: $(addsuffix .test-compile, $(TEST))
+
+%.test-compile:
+	cd $* && go test -compiler=$(COMPILER) -p 1 -v -c .
+ 
+notest:
+	@echo $(NOTEST) | xargs -n 1 echo
