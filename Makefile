@@ -35,7 +35,7 @@ capn:
 .PHONY: get
 get:
 	GOPATH=$(PWD)/gopath go get -u -d code.google.com/p/goprotobuf/proto
-	GOPATH=$(PWD) go get -u -d code.google.com/p/gogoprotobuf/proto
+	GOPATH=$(PWD)/gopath go get -u -d code.google.com/p/gogoprotobuf/proto
 	GOPATH=$(PWD)/gopath go get -u -d code.google.com/p/gogoprototest
 	GOPATH=$(PWD)/gopath go get -u -d github.com/jmckaskill/go-capnproto
 	GOPATH=$(PWD)/gopath go get -u -d github.com/kaos/capnp_test || true
