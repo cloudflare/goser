@@ -26,7 +26,7 @@ proto:
 capn:
 	go version
 	go install -v github.com/jmckaskill/go-capnproto/capnpc-go
-	capnp compile --verbose -ogo $(PWD)/src/capnp/{log,country}.capnp
+	capnp compile --verbose -ogo $(PWD)/src/capnp/log.capnp $(PWD)/src/capnp/country.capnp
 	go test -c goser
 	./goser.test
 	./goser.test -test.benchtime=10s -test.cpuprofile=cpu.prof -test.run=XXX -test.bench=. -test.benchmem
