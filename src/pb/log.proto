@@ -1,6 +1,4 @@
-package proto;
-
-option go_package = "pb";
+package pb;
 
 message HTTP {
 	enum Protocol {
