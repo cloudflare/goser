@@ -25,7 +25,7 @@ proto:
 .PHONY: capn
 capn:
 	go version
-	go install -v github.com/jmckaskill/go-capnproto/capnpc-go
+	go install -v github.com/glycerine/go-capnproto/capnpc-go
 	capnp compile --verbose -ogo $(PWD)/src/capnp/log.capnp $(PWD)/src/capnp/country.capnp
 	go test -c goser
 	./goser.test
@@ -37,7 +37,7 @@ get:
 	GOPATH=$(PWD)/gopath go get -u -d code.google.com/p/goprotobuf/proto
 	GOPATH=$(PWD)/gopath go get -u -d code.google.com/p/gogoprotobuf/proto
 	GOPATH=$(PWD)/gopath go get -u -d code.google.com/p/gogoprototest
-	GOPATH=$(PWD)/gopath go get -u -d github.com/jmckaskill/go-capnproto
+	GOPATH=$(PWD)/gopath go get -u -d github.com/glycerine/go-capnproto
 	GOPATH=$(PWD)/gopath go get -u -d github.com/kaos/capnp_test || true
 	GOPATH=$(PWD)/gopath go get code.google.com/p/go.tools/cmd/benchcmp
 

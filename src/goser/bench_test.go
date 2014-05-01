@@ -5,7 +5,7 @@ import (
 	"capnp"
 	"code.google.com/p/goprotobuf/proto"
 	"encoding/json"
-	"github.com/jmckaskill/go-capnproto"
+	"github.com/glycerine/go-capnproto"
 	"gogopb_both"
 	"pb"
 	"testing"
