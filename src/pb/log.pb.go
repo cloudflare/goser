@@ -1033,11 +1033,11 @@ func (x *Origin_Protocol) UnmarshalJSON(data []byte) error {
 }
 
 type HTTP struct {
-	Protocol         *HTTP_Protocol `protobuf:"varint,1,opt,name=protocol,enum=proto.HTTP_Protocol" json:"protocol,omitempty"`
+	Protocol         *HTTP_Protocol `protobuf:"varint,1,opt,name=protocol,enum=pb.HTTP_Protocol" json:"protocol,omitempty"`
 	Status           *uint32        `protobuf:"varint,2,opt,name=status" json:"status,omitempty"`
 	HostStatus       *uint32        `protobuf:"varint,3,opt,name=hostStatus" json:"hostStatus,omitempty"`
 	UpStatus         *uint32        `protobuf:"varint,4,opt,name=upStatus" json:"upStatus,omitempty"`
-	Method           *HTTP_Method   `protobuf:"varint,5,opt,name=method,enum=proto.HTTP_Method" json:"method,omitempty"`
+	Method           *HTTP_Method   `protobuf:"varint,5,opt,name=method,enum=pb.HTTP_Method" json:"method,omitempty"`
 	ContentType      *string        `protobuf:"bytes,6,opt,name=contentType" json:"contentType,omitempty"`
 	UserAgent        *string        `protobuf:"bytes,7,opt,name=userAgent" json:"userAgent,omitempty"`
 	Referer          *string        `protobuf:"bytes,8,opt,name=referer" json:"referer,omitempty"`
@@ -1116,7 +1116,7 @@ type Origin struct {
 	Ip               []byte           `protobuf:"bytes,1,opt,name=ip" json:"ip,omitempty"`
 	Port             *uint32          `protobuf:"varint,2,opt,name=port" json:"port,omitempty"`
 	Hostname         *string          `protobuf:"bytes,3,opt,name=hostname" json:"hostname,omitempty"`
-	Protocol         *Origin_Protocol `protobuf:"varint,4,opt,name=protocol,enum=proto.Origin_Protocol" json:"protocol,omitempty"`
+	Protocol         *Origin_Protocol `protobuf:"varint,4,opt,name=protocol,enum=pb.Origin_Protocol" json:"protocol,omitempty"`
 	XXX_unrecognized []byte           `json:"-"`
 }
 
@@ -1155,11 +1155,11 @@ func (m *Origin) GetProtocol() Origin_Protocol {
 type Log struct {
 	Timestamp        *int64       `protobuf:"fixed64,1,opt,name=timestamp" json:"timestamp,omitempty"`
 	ZoneId           *uint32      `protobuf:"varint,2,opt,name=zoneId" json:"zoneId,omitempty"`
-	ZonePlan         *ZonePlan    `protobuf:"varint,3,opt,name=zonePlan,enum=proto.ZonePlan" json:"zonePlan,omitempty"`
+	ZonePlan         *ZonePlan    `protobuf:"varint,3,opt,name=zonePlan,enum=pb.ZonePlan" json:"zonePlan,omitempty"`
 	Http             *HTTP        `protobuf:"bytes,4,opt,name=http" json:"http,omitempty"`
 	Origin           *Origin      `protobuf:"bytes,5,opt,name=origin" json:"origin,omitempty"`
-	Country          *Country     `protobuf:"varint,6,opt,name=country,enum=proto.Country" json:"country,omitempty"`
-	CacheStatus      *CacheStatus `protobuf:"varint,7,opt,name=cacheStatus,enum=proto.CacheStatus" json:"cacheStatus,omitempty"`
+	Country          *Country     `protobuf:"varint,6,opt,name=country,enum=pb.Country" json:"country,omitempty"`
+	CacheStatus      *CacheStatus `protobuf:"varint,7,opt,name=cacheStatus,enum=pb.CacheStatus" json:"cacheStatus,omitempty"`
 	ServerIp         []byte       `protobuf:"bytes,8,opt,name=serverIp" json:"serverIp,omitempty"`
 	ServerName       *string      `protobuf:"bytes,9,opt,name=serverName" json:"serverName,omitempty"`
 	RemoteIp         []byte       `protobuf:"bytes,10,opt,name=remoteIp" json:"remoteIp,omitempty"`
@@ -1257,10 +1257,10 @@ func (m *Log) GetRayId() string {
 }
 
 func init() {
-	proto.RegisterEnum("proto.CacheStatus", CacheStatus_name, CacheStatus_value)
-	proto.RegisterEnum("proto.ZonePlan", ZonePlan_name, ZonePlan_value)
-	proto.RegisterEnum("proto.Country", Country_name, Country_value)
-	proto.RegisterEnum("proto.HTTP_Protocol", HTTP_Protocol_name, HTTP_Protocol_value)
-	proto.RegisterEnum("proto.HTTP_Method", HTTP_Method_name, HTTP_Method_value)
-	proto.RegisterEnum("proto.Origin_Protocol", Origin_Protocol_name, Origin_Protocol_value)
+	proto.RegisterEnum("pb.CacheStatus", CacheStatus_name, CacheStatus_value)
+	proto.RegisterEnum("pb.ZonePlan", ZonePlan_name, ZonePlan_value)
+	proto.RegisterEnum("pb.Country", Country_name, Country_value)
+	proto.RegisterEnum("pb.HTTP_Protocol", HTTP_Protocol_name, HTTP_Protocol_value)
+	proto.RegisterEnum("pb.HTTP_Method", HTTP_Method_name, HTTP_Method_value)
+	proto.RegisterEnum("pb.Origin_Protocol", Origin_Protocol_name, Origin_Protocol_value)
 }

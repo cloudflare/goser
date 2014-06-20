@@ -13,10 +13,10 @@ proto:
 	go install -v code.google.com/p/goprotobuf/protoc-gen-go
 	go install -v code.google.com/p/gogoprotobuf/protoc-gen-gogo
 	cd src && protoc --go_out=. pb/log.proto
-	cd src && protoc --gogo_out=. gogopb/log.proto
-	cd src && protoc --gogo_out=. gogopb_nullable/log.proto
-	cd src && protoc --gogo_out=. gogopb_unsafe/log.proto
-	cd src && protoc --gogo_out=. gogopb_both/log.proto
+	cd src && protoc -I$(PWD)/gopath/src -I. --gogo_out=. gogopb/log.proto
+	cd src && protoc -I$(PWD)/gopath/src -I. --gogo_out=. gogopb_nullable/log.proto
+	cd src && protoc -I$(PWD)/gopath/src -I. --gogo_out=. gogopb_unsafe/log.proto
+	cd src && protoc -I$(PWD)/gopath/src -I. --gogo_out=. gogopb_both/log.proto
 	go test code.google.com/p/gogoprototest
 	go test pb
 	go test gogopb gogopb_nullable gogopb_unsafe gogopb_both
@@ -25,8 +25,8 @@ proto:
 .PHONY: capn
 capn:
 	go version
-	go install -v github.com/jmckaskill/go-capnproto/capnpc-go
-	capnp compile --verbose -ogo $(PWD)/src/capnp/{log,country}.capnp
+	go install -v github.com/glycerine/go-capnproto/capnpc-go
+	capnp compile --verbose -ogo $(PWD)/src/capnp/log.capnp $(PWD)/src/capnp/country.capnp
 	go test -c goser
 	./goser.test
 	./goser.test -test.benchtime=10s -test.cpuprofile=cpu.prof -test.run=XXX -test.bench=. -test.benchmem
@@ -35,9 +35,9 @@ capn:
 .PHONY: get
 get:
 	GOPATH=$(PWD)/gopath go get -u -d code.google.com/p/goprotobuf/proto
-	GOPATH=$(PWD) go get -u -d code.google.com/p/gogoprotobuf/proto
+	GOPATH=$(PWD)/gopath go get -u -d code.google.com/p/gogoprotobuf/proto
 	GOPATH=$(PWD)/gopath go get -u -d code.google.com/p/gogoprototest
-	GOPATH=$(PWD)/gopath go get -u -d github.com/jmckaskill/go-capnproto
+	GOPATH=$(PWD)/gopath go get -u -d github.com/glycerine/go-capnproto
 	GOPATH=$(PWD)/gopath go get -u -d github.com/kaos/capnp_test || true
 	GOPATH=$(PWD)/gopath go get code.google.com/p/go.tools/cmd/benchcmp
 
