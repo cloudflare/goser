@@ -13,10 +13,10 @@ proto:
 	go install -v code.google.com/p/goprotobuf/protoc-gen-go
 	go install -v code.google.com/p/gogoprotobuf/protoc-gen-gogo
 	cd src && protoc --go_out=. pb/log.proto
-	cd src && protoc -I$(PWD)/gopath/src -I. --gogo_out=. gogopb/log.proto
-	cd src && protoc -I$(PWD)/gopath/src -I. --gogo_out=. gogopb_nullable/log.proto
-	cd src && protoc -I$(PWD)/gopath/src -I. --gogo_out=. gogopb_unsafe/log.proto
-	cd src && protoc -I$(PWD)/gopath/src -I. --gogo_out=. gogopb_both/log.proto
+	cd src && protoc -I$(PWD)/gopath/src -I$(PWD)/gopath/src/code.google.com/p/gogoprotobuf/protobuf -I. --gogo_out=. gogopb/log.proto
+	cd src && protoc -I$(PWD)/gopath/src -I$(PWD)/gopath/src/code.google.com/p/gogoprotobuf/protobuf -I. --gogo_out=. gogopb_nullable/log.proto
+	cd src && protoc -I$(PWD)/gopath/src -I$(PWD)/gopath/src/code.google.com/p/gogoprotobuf/protobuf -I. --gogo_out=. gogopb_unsafe/log.proto
+	cd src && protoc -I$(PWD)/gopath/src -I$(PWD)/gopath/src/code.google.com/p/gogoprotobuf/protobuf -I. --gogo_out=. gogopb_both/log.proto
 	go test code.google.com/p/gogoprototest
 	go test pb
 	go test gogopb gogopb_nullable gogopb_unsafe gogopb_both
