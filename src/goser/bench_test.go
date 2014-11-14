@@ -47,9 +47,13 @@ func BenchmarkMarshalJSON(b *testing.B) {
 	}
 	b.SetBytes(int64(len(buf)))
 
+	buffer := bytes.NewBuffer(make([]byte, 1<<20))
+
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		_, err := json.Marshal(&record)
+		buffer.Reset()
+		encoder := json.NewEncoder(buffer)
+		err := encoder.Encode(&record)
 		if err != nil {
 			b.Fatalf("Marshal: %v", err)
 		}
@@ -66,9 +70,12 @@ func BenchmarkMarshalPb(b *testing.B) {
 	}
 	b.SetBytes(int64(len(buf)))
 
+	buffer := proto.NewBuffer(make([]byte, 1<<20))
+
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		_, err := proto.Marshal(&record)
+		buffer.Reset()
+		err := buffer.Marshal(&record)
 		if err != nil {
 			b.Fatalf("Marshal: %v", err)
 		}
@@ -85,9 +92,12 @@ func BenchmarkMarshalGogopb(b *testing.B) {
 	}
 	b.SetBytes(int64(len(buf)))
 
+	buffer := proto.NewBuffer(make([]byte, 1<<20))
+
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		_, err := proto.Marshal(&record)
+		buffer.Reset()
+		err := buffer.Marshal(&record)
 		if err != nil {
 			b.Fatalf("Marshal: %v", err)
 		}
