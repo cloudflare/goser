@@ -2,7 +2,7 @@ package goser
 
 import (
 	"capnp"
-	"code.google.com/p/goprotobuf/proto"
+	"github.com/golang/protobuf/proto"
 	"gogopb_both"
 	"net"
 	"pb"

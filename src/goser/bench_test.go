@@ -3,9 +3,9 @@ package goser
 import (
 	"bytes"
 	"capnp"
-	"code.google.com/p/goprotobuf/proto"
 	"encoding/json"
 	"github.com/glycerine/go-capnproto"
+	"github.com/golang/protobuf/proto"
 	"gogopb_both"
 	"pb"
 	"testing"

@@ -10,14 +10,14 @@ all: get capnproto proto capn
 .PHONY: proto
 proto:
 	go version
-	go install -v code.google.com/p/goprotobuf/protoc-gen-go
-	go install -v code.google.com/p/gogoprotobuf/protoc-gen-gogo
+	go install -v github.com/golang/protobuf/protoc-gen-go
+	go install -v github.com/gogo/protobuf/protoc-gen-gogo
 	cd src && protoc --go_out=. pb/log.proto
-	cd src && protoc -I$(PWD)/gopath/src -I$(PWD)/gopath/src/code.google.com/p/gogoprotobuf/protobuf -I. --gogo_out=. gogopb/log.proto
-	cd src && protoc -I$(PWD)/gopath/src -I$(PWD)/gopath/src/code.google.com/p/gogoprotobuf/protobuf -I. --gogo_out=. gogopb_nullable/log.proto
-	cd src && protoc -I$(PWD)/gopath/src -I$(PWD)/gopath/src/code.google.com/p/gogoprotobuf/protobuf -I. --gogo_out=. gogopb_unsafe/log.proto
-	cd src && protoc -I$(PWD)/gopath/src -I$(PWD)/gopath/src/code.google.com/p/gogoprotobuf/protobuf -I. --gogo_out=. gogopb_both/log.proto
-	go test code.google.com/p/gogoprototest
+	cd src && protoc -I$(PWD)/gopath/src -I$(PWD)/gopath/src/github.com/gogo/protobuf/protobuf -I. --gogo_out=. gogopb/log.proto
+	cd src && protoc -I$(PWD)/gopath/src -I$(PWD)/gopath/src/github.com/gogo/protobuf/protobuf -I. --gogo_out=. gogopb_nullable/log.proto
+	cd src && protoc -I$(PWD)/gopath/src -I$(PWD)/gopath/src/github.com/gogo/protobuf/protobuf -I. --gogo_out=. gogopb_unsafe/log.proto
+	cd src && protoc -I$(PWD)/gopath/src -I$(PWD)/gopath/src/github.com/gogo/protobuf/protobuf -I. --gogo_out=. gogopb_both/log.proto
+	go test github.com/gogo/harmonytests
 	go test pb
 	go test gogopb gogopb_nullable gogopb_unsafe gogopb_both
 	go test -run=XXX -bench=LogProto -benchmem gogopb gogopb_nullable gogopb_unsafe gogopb_both
@@ -34,12 +34,12 @@ capn:
 
 .PHONY: get
 get:
-	GOPATH=$(PWD)/gopath go get -u -d code.google.com/p/goprotobuf/proto
-	GOPATH=$(PWD)/gopath go get -u -d code.google.com/p/gogoprotobuf/proto
-	GOPATH=$(PWD)/gopath go get -u -d code.google.com/p/gogoprototest
+	GOPATH=$(PWD)/gopath go get -u -d github.com/golang/protobuf/proto
+	GOPATH=$(PWD)/gopath go get -u -d github.com/gogo/protobuf/proto
+	GOPATH=$(PWD)/gopath go get -u -d github.com/gogo/harmonytests
 	GOPATH=$(PWD)/gopath go get -u -d github.com/glycerine/go-capnproto
 	GOPATH=$(PWD)/gopath go get -u -d github.com/kaos/capnp_test || true
-	GOPATH=$(PWD)/gopath go get code.google.com/p/go.tools/cmd/benchcmp
+	GOPATH=$(PWD)/gopath go get golang.org/x/tools/cmd/benchcmp
 
 .PHONY: capnproto
 capnproto:
