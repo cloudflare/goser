@@ -2,6 +2,7 @@ bin/
 lib/
 include/
 pkg/
-capnproto/
+capnproto-*/
+protobuf-*/
 gopath/
 *.test
