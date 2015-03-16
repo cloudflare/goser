@@ -1,5 +1,5 @@
 export GOPATH := $(PWD):$(PWD)/gopath
-export PATH := $(PWD)/bin:$(PWD)/gopath/bin:$(PATH)
+export PATH := $(PWD)/gopath/bin:$(PATH)
 export GOMAXPROCS := 1
 
 GOCMD := go
@@ -26,7 +26,7 @@ proto:
 capn:
 	go version
 	go install -v github.com/glycerine/go-capnproto/capnpc-go
-	capnp compile --verbose -ogo $(PWD)/src/capnp/log.capnp $(PWD)/src/capnp/country.capnp
+	bin/capnp compile --verbose -ogo $(PWD)/src/capnp/log.capnp $(PWD)/src/capnp/country.capnp
 	go test -c goser
 	./goser.test
 	./goser.test -test.benchtime=10s -test.cpuprofile=cpu.prof -test.run=XXX -test.bench=. -test.benchmem
