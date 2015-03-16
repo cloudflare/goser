@@ -9,3 +9,5 @@ gopath/
 *.capnp.go
 *.pb.go
 *pb_test.go
+cpu.prof
+cpu.svg
