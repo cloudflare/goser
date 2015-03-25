@@ -12,6 +12,10 @@ PROTOC_CMD := bin/protoc
 
 .PHONY: all
 all: get proto capn
+	go test -c goser
+	./goser.test
+	./goser.test -test.benchtime=10s -test.cpuprofile=cpu.prof -test.run=XXX -test.bench=. -test.benchmem
+	go tool pprof --svg goser.test cpu.prof > cpu.svg
 
 .PHONY: proto
 proto: $(PROTOC_CMD)
@@ -23,10 +27,6 @@ proto: $(PROTOC_CMD)
 	cd src && ../$(PROTOC_CMD) -I$(PWD)/gopath/src -I$(PWD)/gopath/src/github.com/gogo/protobuf/protobuf -I. --gogo_out=. gogopb_nullable/log.proto
 	cd src && ../$(PROTOC_CMD) -I$(PWD)/gopath/src -I$(PWD)/gopath/src/github.com/gogo/protobuf/protobuf -I. --gogo_out=. gogopb_unsafe/log.proto
 	cd src && ../$(PROTOC_CMD) -I$(PWD)/gopath/src -I$(PWD)/gopath/src/github.com/gogo/protobuf/protobuf -I. --gogo_out=. gogopb_both/log.proto
-	go test github.com/gogo/harmonytests
-	go test pb
-	go test gogopb gogopb_nullable gogopb_unsafe gogopb_both
-	go test -run=XXX -bench=LogProto -benchmem gogopb gogopb_nullable gogopb_unsafe gogopb_both
 
 $(PROTOC_CMD):
 	test -d $(PROTOC_NAME) || curl -s -L https://github.com/google/protobuf/releases/download/v$(PROTOC_VERSION)/$(PROTOC_NAME).tar.bz2 | tar jx
@@ -40,10 +40,6 @@ capn: $(CAPNP_CMD)
 	go version
 	go install -v github.com/glycerine/go-capnproto/capnpc-go
 	$(CAPNP_CMD) compile --verbose -ogo $(PWD)/src/capnp/log.capnp $(PWD)/src/capnp/country.capnp
-	go test -c goser
-	./goser.test
-	./goser.test -test.benchtime=10s -test.cpuprofile=cpu.prof -test.run=XXX -test.bench=. -test.benchmem
-	go tool pprof --svg goser.test cpu.prof > cpu.svg
 
 $(CAPNP_CMD):
 	test -d $(CAPNP_NAME) || curl -s -L https://capnproto.org/$(CAPNP_NAME).tar.gz | tar zx
