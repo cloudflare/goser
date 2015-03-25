@@ -13,7 +13,6 @@ PROTOC_CMD := bin/protoc
 .PHONY: all
 all: get capnp proto
 	go test -c goser
-	./goser.test
 	./goser.test -test.benchtime=10s -test.cpuprofile=cpu.prof -test.run=XXX -test.bench=. -test.benchmem
 	go tool pprof --svg goser.test cpu.prof > cpu.svg
 
