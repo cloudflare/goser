@@ -2,6 +2,12 @@ bin/
 lib/
 include/
 pkg/
-capnproto/
+capnproto-*/
+protobuf-*/
 gopath/
 *.test
+*.capnp.go
+*.pb.go
+*pb_test.go
+cpu.prof
+cpu.svg
