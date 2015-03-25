@@ -11,7 +11,7 @@ PROTOC_NAME := protobuf-$(PROTOC_VERSION)
 PROTOC_CMD := bin/protoc
 
 .PHONY: all
-all: get proto capn
+all: get capnp proto
 	go test -c goser
 	./goser.test
 	./goser.test -test.benchtime=10s -test.cpuprofile=cpu.prof -test.run=XXX -test.bench=. -test.benchmem
@@ -35,8 +35,8 @@ $(PROTOC_CMD):
 	make -j3 && \
 	make install
 
-.PHONY: capn
-capn: $(CAPNP_CMD)
+.PHONY: capnp
+capnp: $(CAPNP_CMD)
 	go version
 	go install -v github.com/glycerine/go-capnproto/capnpc-go
 	$(CAPNP_CMD) compile --verbose -ogo $(PWD)/src/capnp/log.capnp $(PWD)/src/capnp/country.capnp
