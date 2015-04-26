@@ -3,12 +3,12 @@ export PATH := $(PWD)/gopath/bin:$(PATH)
 export GOMAXPROCS := 1
 
 GOCMD := go
-CAPNP_VERSION := 0.5.1.2
+CAPNP_VERSION := 0.5.2
 CAPNP_NAME := capnproto-c++-$(CAPNP_VERSION)
-CAPNP_CMD := bin/capnp
+CAPNP_CMD := $(CAPNP_NAME)/capnp
 PROTOC_VERSION := 2.6.1
 PROTOC_NAME := protobuf-$(PROTOC_VERSION)
-PROTOC_CMD := bin/protoc
+PROTOC_CMD := $(PROTOC_NAME)/src/protoc
 
 .PHONY: all
 all: get capnp proto
@@ -30,9 +30,8 @@ proto: $(PROTOC_CMD)
 $(PROTOC_CMD):
 	test -d $(PROTOC_NAME) || curl -s -L https://github.com/google/protobuf/releases/download/v$(PROTOC_VERSION)/$(PROTOC_NAME).tar.bz2 | tar jx
 	cd $(PROTOC_NAME) && \
-	./configure --prefix=$(PWD) && \
-	make -j3 && \
-	make install
+	./configure && \
+	make -j3
 
 .PHONY: capnp
 capnp: $(CAPNP_CMD)
@@ -43,9 +42,8 @@ capnp: $(CAPNP_CMD)
 $(CAPNP_CMD):
 	test -d $(CAPNP_NAME) || curl -s -L https://capnproto.org/$(CAPNP_NAME).tar.gz | tar zx
 	cd $(CAPNP_NAME) && \
-	./configure --prefix=$(PWD) && \
-	make -j3 && \
-	make install
+	./configure && \
+	make -j3
 
 .PHONY: get
 get:
